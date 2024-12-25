@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using PZ.DAL.Entities;
 
-namespace PZ.DAL.Repository.Abstractions
+namespace PZ.DAL.Repositories.Abstractions
 {
     public interface IRepository<TEntity> where TEntity : BaseEntity
     {

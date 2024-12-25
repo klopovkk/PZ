@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PZ.DAL.Repository.Abstractions;
+using PZ.DAL.Repositories.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using PZ.DAL.Entities;
 
-namespace PZ.DAL.Repository
+namespace PZ.DAL.Repositories
 {
     public class UnitOfWork : IUnitOfWork
     {

@@ -23,12 +23,9 @@ namespace PZ.DAL.Entities
         [Column("email)")]
         public string Email { get; set; }
 
-        [Column("email)")]
-        public string Permissions { get; set; }
-
         [Column("role_id)")]
-        public Guid RoleId;
+        public Guid? RoleId;
         [NotMapped]
-        public Role Role { get; set; }
+        public Role? Role { get; set; }
     }
 }

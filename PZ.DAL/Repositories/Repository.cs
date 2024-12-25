@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PZ.DAL.Entities;
-using PZ.DAL.Repository.Abstractions;
+using PZ.DAL.Repositories.Abstractions;
 
-namespace PZ.DAL.Repository;
+namespace PZ.DAL.Repositories;
 
 public class Repository<TEntity> : IRepository<TEntity> where TEntity : BaseEntity
 {

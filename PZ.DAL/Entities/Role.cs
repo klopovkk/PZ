@@ -5,7 +5,10 @@ namespace PZ.DAL.Entities;
 [Table("administrator")]
 public class Role : BaseEntity
 {
-    public string name { get; set; }
+    [Column("name)")]
+    public string Name { get; set; }
+    [Column("permissions)")]
+    public string Permissions { get; set; }
 
     [NotMapped]
     public ICollection<Employee> Employees { get; set; }
