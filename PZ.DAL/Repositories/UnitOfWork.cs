@@ -35,6 +35,20 @@ namespace PZ.DAL.Repositories
             return (IRepository<TEntity>)_repositories[type];
         }
 
+        public IEmployeeRepository GetEmpRepository() 
+        {
+            var type = nameof(EmployeeRepository);
+
+            if (!_repositories.ContainsKey(type))
+            {
+                var repositoryType = nameof(EmployeeRepository);
+                var repositoryInstance = new EmployeeRepository(_context);
+                _repositories.Add(type, repositoryInstance);
+            }
+
+            return (EmployeeRepository)_repositories[type];
+        }
+
         public async Task<int> SaveChangesAsync()
         {
             return await _context.SaveChangesAsync();

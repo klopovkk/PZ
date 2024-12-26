@@ -7,6 +7,7 @@ using Moq;
 using Xunit;
 using PZ.DAL.Entities;
 using PZ.DAL.Repositories;
+using PZ.DAL.Repositories.Abstractions;
 
 namespace PZ.DAL.TEST
 {
@@ -34,10 +35,12 @@ namespace PZ.DAL.TEST
                 .Setup(m => m.GetAsyncEnumerator(It.IsAny<CancellationToken>()))
                 .Returns(new TestAsyncEnumerator<Employee>(employees.GetEnumerator()));
 
+            var mockUnitOfWork = new Mock<IUnitOfWork>();
             var mockContext = new Mock<DbContext>();
             mockContext.Setup(c => c.Set<Employee>()).Returns(mockDbSet.Object);
 
-            var repository = new EmployeeRepository(mockContext.Object);
+            var unitOfWork = new UnitOfWork(mockContext.Object);
+            var repository = unitOfWork.GetEmpRepository();
 
             // Act
             var result = await repository.GetEmpWithoutRole();
@@ -46,6 +49,7 @@ namespace PZ.DAL.TEST
             Assert.NotNull(result);
             Assert.Equal(2, result.Count); // Expect 2 employees without roles
             Assert.All(result, e => Assert.Null(e.RoleId));
+
         }
 
         [Fact]
@@ -68,7 +72,8 @@ namespace PZ.DAL.TEST
             var mockContext = new Mock<DbContext>();
             mockContext.Setup(c => c.Set<Employee>()).Returns(mockDbSet.Object);
 
-            var repository = new EmployeeRepository(mockContext.Object);
+            var unitOfWork = new UnitOfWork(mockContext.Object);
+            var repository = unitOfWork.GetEmpRepository();
 
             // Act
             var result = await repository.GetEmpWithoutRole();
@@ -103,7 +108,8 @@ namespace PZ.DAL.TEST
             var mockContext = new Mock<DbContext>();
             mockContext.Setup(c => c.Set<Employee>()).Returns(mockDbSet.Object);
 
-            var repository = new EmployeeRepository(mockContext.Object);
+            var unitOfWork = new UnitOfWork(mockContext.Object);
+            var repository = unitOfWork.GetEmpRepository();
 
             // Act
             var result = await repository.GetEmpWithoutRole();
